@@ -21,6 +21,7 @@ urlpatterns = [
     re_path(r'^(?P<pk>[0-9]+)/(?P<slug>[\w-]+)/$', views.detail, name='detail'),
 
     re_path(r'^active/$', views.index_active, name='index-active'),
+    re_path(r'^assigned/$', views.assigned, name='assigned'),
 
     re_path(r'^moderate/', include(spirit.topic.moderate.urls)),
     re_path(r'^unread/', include(spirit.topic.unread.urls)),

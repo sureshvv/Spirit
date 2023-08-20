@@ -47,6 +47,10 @@
               >{% trans "Topics" %}</a></li>
             <li><a
               class="menu_list__link"
+              href="{% url "spirit:topic:assigned" %}"
+              >{% trans "My topics" %}</a></li>
+            <li><a
+              class="menu_list__link"
               href="{% url "spirit:topic:unread:index" %}"
               >{% trans "Unread topics" %}</a></li>
             <li><a

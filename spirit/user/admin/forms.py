@@ -20,4 +20,4 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ("location", "timezone", "is_verified", "is_administrator",
-                  "is_moderator", "is_spirit_user")
+                  "is_moderator", "is_spirit_user", "is_assignee")

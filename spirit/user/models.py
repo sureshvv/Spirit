@@ -58,6 +58,7 @@ class UserProfile(models.Model):
             'account by email or by other means. Un-select this '
             'to let the user activate his account.'))
     is_spirit_user = models.BooleanField(_('spirit user'), default=True)
+    is_assignee = models.BooleanField(default=False)
 
     topic_count = models.PositiveIntegerField(_("topic count"), default=0)
     comment_count = models.PositiveIntegerField(_("comment count"), default=0)

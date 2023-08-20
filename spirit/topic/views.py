@@ -128,3 +128,22 @@ def index_active(request):
         context={
             'categories': categories,
             'topics': topics})
+
+
+def assigned(request):
+    topics = (
+        Topic.objects
+        .visible()
+        .global_()
+        .filter(assignee=request.user)
+        .order_by('-is_globally_pinned', '-last_active'))
+
+    topics = yt_paginate(
+        topics,
+        per_page=config.topics_per_page,
+        page_number=request.GET.get('page', 1))
+
+    return render(
+        request=request,
+        template_name='spirit/topic/assigned.html',
+        context={'topics': topics})

@@ -4,11 +4,14 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.encoding import smart_bytes
 from django.utils import timezone
+from django.contrib.auth import get_user_model
 
 from ..core import utils
 from ..core.utils.forms import NestedModelChoiceField
 from ..category.models import Category
 from .models import Topic
+
+User = get_user_model()
 
 
 class TopicForm(forms.ModelForm):
@@ -20,7 +23,7 @@ class TopicForm(forms.ModelForm):
 
     class Meta:
         model = Topic
-        fields = ('title', 'category')
+        fields = ('title', 'category', 'assignee')
 
     def __init__(self, user, *args, **kwargs):
         super(TopicForm, self).__init__(*args, **kwargs)
@@ -35,6 +38,13 @@ class TopicForm(forms.ModelForm):
 
         if self.instance.pk and not user.st.is_moderator:
             del self.fields['category']
+
+        self.fields['assignee'] = forms.ModelChoiceField(
+            queryset=User.objects.filter(st__is_assignee=True),
+            label=_("Assignee"),
+            required=False,
+            blank=True,
+            empty_label=_("Choose an assignee (optional)"))
 
     def get_category(self):
         return self.cleaned_data['category']

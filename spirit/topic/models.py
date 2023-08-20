@@ -31,6 +31,11 @@ class Topic(models.Model):
         'spirit_category.Category',
         verbose_name=_("category"),
         on_delete=models.CASCADE)
+    assignee = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='st_assignee',
+        null=True,
+        on_delete=models.SET_NULL)
 
     title = models.CharField(_("title"), max_length=255)
     slug = AutoSlugField(populate_from="title", db_index=False, blank=True)
