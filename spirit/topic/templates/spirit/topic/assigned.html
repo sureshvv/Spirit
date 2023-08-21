@@ -1,0 +1,15 @@
+{% extends "spirit/_base.html" %}
+
+{% load spirit_tags i18n %}
+
+{% block title %}{% trans "My assigned topics" %}{% endblock %}
+
+{% block content %}
+  <div class="layout__article">
+    <h3>My assigned topics</h3>
+
+    {% include "spirit/topic/_render_list.html" %}
+
+    {% render_paginator topics %}
+  </div>
+{% endblock %}
