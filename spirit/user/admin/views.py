@@ -45,7 +45,7 @@ def _index(request, queryset, template):
 def index(request):
     return _index(
         request,
-        queryset=User.objects.filter(st__is_spirit_user=True),
+        queryset=User.objects.filter(member__id__gt=0),
         template='spirit/user/admin/index.html'
     )
 
@@ -69,6 +69,6 @@ def index_mods(request):
 def index_unactive(request):
     return _index(
         request,
-        queryset=User.objects.filter(is_active=False),
+        queryset=User.objects.filter(member__id__gt=0, is_active=False),
         template='spirit/user/admin/unactive.html'
     )
