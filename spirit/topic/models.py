@@ -10,6 +10,8 @@ from .managers import TopicQuerySet
 from ..core.utils.models import AutoSlugField
 from ..core.conf import settings
 
+from taggit.managers import TaggableManager
+
 
 class Topic(models.Model):
     """
@@ -52,6 +54,7 @@ class Topic(models.Model):
     comment_count = models.PositiveIntegerField(_("comment count"), default=0)
 
     objects = TopicQuerySet.as_manager()
+    tags = TaggableManager()
 
     class Meta:
         ordering = ['-last_active', '-pk']

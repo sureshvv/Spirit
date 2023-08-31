@@ -1,4 +1,13 @@
 {% load spirit_tags i18n %}
+<style>
+.badge {
+  background-color: red;
+  color: white;
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 5px;
+}
+</style>
 
 <div class="layout__topics">
   {% for t in topics %}
@@ -42,6 +51,11 @@
       <div class="topic__date" title="{{ t.last_active }}">
         <i class="fa fa-clock-o"
         ></i> {{ t.last_active|shortnaturaltime }}
+      </div>
+      <div class="topic__date">
+        {% for t in t.tags.all %}
+          &nbsp;<span class="badge">{{ t }}</span>
+        {% endfor %}
       </div>
     </div>
     {% empty %}

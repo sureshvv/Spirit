@@ -11,6 +11,9 @@ from ..core.utils.forms import NestedModelChoiceField
 from ..category.models import Category
 from .models import Topic
 
+from taggit.forms import TagField
+from taggit_labels.widgets import LabelWidget
+
 User = get_user_model()
 
 
@@ -20,10 +23,11 @@ class TopicForm(forms.ModelForm):
         max_length=32,
         widget=forms.HiddenInput,
         required=False)
+    tags = TagField(required=False, widget=LabelWidget)
 
     class Meta:
         model = Topic
-        fields = ('title', 'category', 'assignee')
+        fields = ('title', 'category', 'assignee', 'tags')
 
     def __init__(self, user, *args, **kwargs):
         super(TopicForm, self).__init__(*args, **kwargs)

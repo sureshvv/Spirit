@@ -67,7 +67,7 @@ def update(request, pk):
         if topic.category_id != category_id:
             Comment.create_moderation_action(
                 user=request.user, topic=topic, action=Comment.MOVED)
-        return safe_redirect(request,'next', topic.get_absolute_url(), method='POST')
+        return safe_redirect(request, 'next', topic.get_absolute_url(), method='POST')
     return render(
         request=request,
         template_name='spirit/topic/update.html',
