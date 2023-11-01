@@ -72,6 +72,9 @@ class Notification
         return
 
     addNotifications: (notifications) =>
+        if window.navigator.serviceWorker
+            reg = await window.navigator.serviceWorker.ready
+            reg.active.postMessage("You have notifications")
         notifications.forEach((n) =>
             # todo: actions should be pass in options as an object map
             if n.action is 1

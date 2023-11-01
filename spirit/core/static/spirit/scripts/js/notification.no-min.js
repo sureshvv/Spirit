@@ -82,6 +82,11 @@
     };
 
     Notification.prototype.addNotifications = function(notifications) {
+      var reg;
+      if (window.navigator.serviceWorker) {
+        reg = await(window.navigator.serviceWorker.ready);
+        reg.active.postMessage("You have notifications");
+      }
       return notifications.forEach((function(_this) {
         return function(n) {
           var linkElm, txt, txtElm, unreadElm;
