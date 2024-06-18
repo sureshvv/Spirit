@@ -32,11 +32,11 @@ class SearchView(BaseSearchView):
         return super(SearchView, self).__call__(request)
 
     def build_page(self):
-        s1 = self.request.GET['q']
+        s1 = self.request.GET['q'].lower()
         comments = [
             (x, y.comment) for x in self.results
             for y in Comment.objects.filter(topic_id=x.pk)
-            if y.comment.find(s1) >= 0 and not y.is_removed
+            if y.comment.lower().find(s1) >= 0 and not y.is_removed
         ]
         paginator = None
         page = yt_paginate(
