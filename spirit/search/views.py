@@ -27,7 +27,6 @@ class SearchView(BaseSearchView):
             form_class=AdvancedSearchForm,
             load_all=False)
 
-    @method_decorator(login_required)
     def __call__(self, request):
         return super(SearchView, self).__call__(request)
 

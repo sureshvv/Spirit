@@ -82,6 +82,18 @@
       </div>
     </div>
   {% else %}
+    <ul class="header__tabs">
+      <li><a
+      class="header__tabs__item js-tab"
+      href="{% url "spirit:search:search" %}"
+      data-related=".js-search-content"
+      ><i class="fa fa-search"></i></a></li>
+    </ul>
+    <div class="header__tabs_content__tab js-tab-content js-search-content" style="display: none;">
+      <div class="header__tab__search">
+        {% render_search_form %}
+      </div>
+    </div>
     <a class="header__login"
       href="{% url st_settings.LOGIN_URL %}?next={% firstof request.get_full_path|urlencode '/' %}"
     >{% trans "Log in" %}</a>
