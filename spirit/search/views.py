@@ -33,16 +33,23 @@ class SearchView(BaseSearchView):
     def build_page(self):
         s1 = self.request.GET['q'].lower()
         comments = [
-            (x, y.comment) for x in self.results
+            (x, y) for x in self.results
             for y in Comment.objects.filter(topic_id=x.pk)
             if y.comment.lower().find(s1) >= 0 and not y.is_removed
         ]
         paginator = None
-        page = yt_paginate(
+        page0 = yt_paginate(
             comments,
             per_page=config.topics_per_page,
             page_number=self.request.GET.get('page', 1))
-        page = [
-            {'fields': dict(r[0].get_stored_fields(), title=r[1]), 'pk': r[0].pk}
-            for r in page]
+        # breakpoint()
+        page = []
+        for r in page0:
+            d0 = dict(r[0].get_stored_fields(), title=r[1].comment)
+            c_id = r[1].id
+            d0['slug'] += f'/#c{c_id}'
+            n_page = 1 + c_id // 20
+            if n_page > 1:
+                d0['slug'] += f'?page={n_page}'
+            page.append({'fields': d0, 'pk': r[0].pk})
         return paginator, page

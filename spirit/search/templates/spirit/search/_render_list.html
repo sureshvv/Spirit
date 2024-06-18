@@ -6,7 +6,7 @@
       <div class="topic__title">
         <a
           class="topic__link js-clickable-area-target"
-          href="{% url 'spirit:topic:detail' pk=t.pk slug=t.fields.slug %}"
+          href="/cp/topic/{{ t.pk }}/{{ t.fields.slug }}"
         >{{ t.fields.title }}</a>
       </div>
       <div class="topic__category"
