@@ -1,7 +1,10 @@
 {% load i18n %}
 
 <form method="get" action="{% url "spirit:search:search" %}">
-  {% include "spirit/_form.html" %}
-
-  <input class="button" type="submit" value="{% trans "Search" %}" />
+  <div style="width: 200px; display: inline-block">
+    <input type="search" name="q" id="id_q">
+  </div>
+  <div style="width: 40px; display: inline-block">
+    <button type="submit"><i class="fa fa-search"></i></button>
+  </div>
 </form>
