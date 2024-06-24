@@ -173,7 +173,14 @@
       document.querySelectorAll('.js-comment-text > blockquote'));
 
     hljs.initHighlightingOnLoad();
-
+    const urlParams = new URLSearchParams(window.location.search);
+    const pos = urlParams.get('pos');
+    if (pos) {
+      let div1 = document.querySelector(`div[data-pk="${pos}"]`)
+      if (div1) {
+        div1.scrollIntoView();
+      }
+    }
   });
 
 </script>
