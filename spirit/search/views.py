@@ -31,7 +31,10 @@ class SearchView(BaseSearchView):
         return super(SearchView, self).__call__(request)
 
     def build_page(self):
-        s1 = self.request.GET['q'].lower()
+        s1 = self.request.GET.get('q')
+        if not s1:
+            return None, []
+        s1 = s1.lower()
         comments = [
             (x, y) for x in self.results
             for y in Comment.objects.filter(topic_id=x.pk)
@@ -47,9 +50,9 @@ class SearchView(BaseSearchView):
         for r in page0:
             d0 = dict(r[0].get_stored_fields(), title=r[1].comment)
             c_id = r[1].id
-            d0['slug'] += f'/#c{c_id}'
             n_page = 1 + c_id // 20
             if n_page > 1:
-                d0['slug'] += f'?page={n_page}'
+                d0['slug'] += f'/?page={n_page}'
+            d0['slug'] += f'#c{c_id}'
             page.append({'fields': d0, 'pk': r[0].pk})
         return paginator, page
