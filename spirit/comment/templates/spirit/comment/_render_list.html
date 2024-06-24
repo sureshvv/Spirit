@@ -5,7 +5,7 @@
   {% if c.action or c.is_removed %}
   <div
     class="comments_list__item js-comment"
-    id="c{{ c.pk }}"
+    id="c{{forloop.counter0|add:comments.start_index }}"
     data-number="{{ forloop.counter0|add:comments.start_index }}"
     data-pk="{{ c.pk }}"
   >
@@ -43,7 +43,7 @@
   {% else %}
   <div
     class="comments_list__comment js-comment"
-    id="c{{ c.pk }}"
+    id="c{{forloop.counter0|add:comments.start_index }}"
     data-number="{{ forloop.counter0|add:comments.start_index }}"
     data-pk="{{ c.pk }}"
   >
